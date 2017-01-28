@@ -1,9 +1,9 @@
 //processa camp de text
 function processa()
 {
-	//borra resultats
+	//primer esborra resultats anteriors
 	document.querySelector('#resultat').innerHTML="";
-	//processa query per línies
+	//processa query línia per línia
 	var query=document.querySelector('#textarea').value;
 	if(query=="")return;
 	query.split('\n').forEach(function(line)
@@ -15,12 +15,14 @@ function processa()
 	});
 }
 
-//busca a youtube
+//busca a youtube fent servir api v3
 function search(q) 
 {
 	var part="snippet";
 	var key="AIzaSyB8SdlLvMy45YYxbXT99dUFMbDiynSC1e8";
 	var url="https://www.googleapis.com/youtube/v3/search?q="+encodeURIComponent(q)+"&part="+part+"&key="+key;
+
+	//nova petició 
 	var sol=new XMLHttpRequest();
 	sol.open('GET',url,true);
 
@@ -32,7 +34,7 @@ function search(q)
 	div.style.maxWidth="49%";
 	div.style.margin="0 0.5em 0.5em 0";
 
-	//paraules buscades
+	//mostra paraules buscades
 	var cerca=document.createElement('div');
 	div.appendChild(cerca)
 	cerca.innerHTML="<b title='"+q+"'>"+q.substring(0,30)+"</b> &emsp;";
@@ -47,20 +49,21 @@ function search(q)
 		if(sol.readyState===XMLHttpRequest.DONE && sol.status===200) 
 		{
 				var list=JSON.parse(sol.responseText);
-
 				var select=creaSelect(list);
 				select.style.display='none';
 				select.style.margin='0.5em 0';
 				div.appendChild(select);
 
-				//toggle display
+				//botó toggle display
 				button.onclick=function(){
 					select.style.display=select.style.display=='none'?"block":"none";
 				}
 
+				//crea un vídeo amb el primer resultat
 				var iframe=creaVideo(list.items[0].id.videoId);
 				div.appendChild(iframe);
 
+				//fes que el select modifiqui el vídeo
 				select.onchange=function()
 				{
 					iframe.src="https://www.youtube.com/embed/"+select.value;
