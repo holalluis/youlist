@@ -23,28 +23,30 @@ function search(q)
 	var url="https://www.googleapis.com/youtube/v3/search?q="+encodeURIComponent(q)+"&part="+part+"&key="+key;
 	var sol=new XMLHttpRequest();
 	sol.open('GET',url,true);
+
+	//crea un div per cada cerca
+	var r=document.querySelector('#resultat');
+	var div=document.createElement('div');
+	r.appendChild(div);
+	div.classList.add('inline');
+	div.style.maxWidth="49%";
+	div.style.margin="0 0.5em 0.5em 0";
+
+	//paraules buscades
+	var cerca=document.createElement('div');
+	div.appendChild(cerca)
+	cerca.innerHTML="<b title='"+q+"'>"+q.substring(0,30)+"</b> &emsp;";
+
+	//botó per fer apareixer el select
+	var button=document.createElement('button');
+	cerca.appendChild(button);
+	button.innerHTML="&#8644;"
+
 	sol.onreadystatechange=function() 
 	{
 		if(sol.readyState===XMLHttpRequest.DONE && sol.status===200) 
 		{
 				var list=JSON.parse(sol.responseText);
-
-				var r=document.querySelector('#resultat');
-				var div=document.createElement('div');
-				r.appendChild(div);
-				div.classList.add('inline');
-				div.style.maxWidth="49%";
-				div.style.margin="0 0.5em 0.5em 0";
-
-				//paraules buscades
-				var cerca=document.createElement('div');
-				div.appendChild(cerca)
-				cerca.innerHTML="<b title='"+q+"'>"+q.substring(0,30)+"</b> &emsp;";
-
-				//botó per fer apareixer el select
-				var button=document.createElement('button');
-				cerca.appendChild(button);
-				button.innerHTML="&#8644;"
 
 				var select=creaSelect(list);
 				select.style.display='none';
