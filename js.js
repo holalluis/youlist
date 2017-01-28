@@ -39,7 +39,7 @@ function search(q)
 				//paraules buscades
 				var cerca=document.createElement('div');
 				div.appendChild(cerca)
-				cerca.innerHTML="<b>"+q.substring(0,30)+"</b> &emsp;";
+				cerca.innerHTML="<b title='"+q+"'>"+q.substring(0,30)+"</b> &emsp;";
 
 				//botó per fer apareixer el select
 				var button=document.createElement('button');
