@@ -1,0 +1,25 @@
+<!doctype html><html><head>
+	<meta charset=utf-8>
+	<link rel=stylesheet href=css.css>
+	<title>YouList</title>
+	<script src=js.js></script>
+	<script>
+		function init() 
+		{
+			document.querySelector('#textarea').focus()
+		}
+	</script>
+</head><body onload=init()>
+
+<h1>YouList &mdash; Busca tota una llista de cançons</h1>
+
+<!--query-->
+<div class=inline style="width:30%;padding:1em">
+	<textarea 
+		id=textarea
+		placeholder="Enganxa una llista de cançons per buscar"></textarea>
+	<button id=btn_processa onclick=processa()>Busca</button>
+</div>
+
+<!--resultat-->
+<div class=inline id=resultat style="max-width:65%;padding:1em"></div>
