@@ -42,7 +42,7 @@ function search(q)
 	//botó per fer apareixer el select
 	var button=document.createElement('button');
 	cerca.appendChild(button);
-	button.innerHTML="&#8644;"
+	button.innerHTML="&vellip;"
 
 	sol.onreadystatechange=function() 
 	{
@@ -60,7 +60,16 @@ function search(q)
 				}
 
 				//crea un vídeo amb el primer resultat
-				var iframe=creaVideo(list.items[0].id.videoId);
+				try{
+					var iframe=creaVideo(list.items[0].id.videoId);
+				}catch(e)
+				{
+					var iframe=document.createElement('div');
+					iframe.innerHTML="no trobat"
+					iframe.style.background="red"
+					iframe.style.padding="1em 0"
+					iframe.style.textAlign="center"
+				}
 				div.appendChild(iframe);
 
 				//fes que el select modifiqui el vídeo
