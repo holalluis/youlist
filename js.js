@@ -48,6 +48,7 @@ function search(q)
 
 				var select=creaSelect(list);
 				select.style.display='none';
+				select.style.margin='0.5em 0';
 				div.appendChild(select);
 
 				//toggle display
